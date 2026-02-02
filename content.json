@@ -1,0 +1,58 @@
+{
+  "request": {
+    "registry": {
+      "settings": {
+        "host_url": "./"
+      }
+    }
+  },
+  "order": {
+    "settings": {
+      "invitation": false
+    },
+    "number": "ABC-123456",
+    "event": {
+      "lifetime": {
+        "start": "2024-12-25T19:00:00+03:00",
+        "end": "2024-12-25T23:00:00+03:00"
+      },
+      "d": {
+        "timezone": "Europe/Moscow"
+      },
+      "venue": {
+        "name": "Крокус Сити Холл///Crocus City Hall"
+      },
+      "age_rating": 18
+    },
+    "created_at": "2024-12-20T14:30:00+03:00"
+  },
+  "ticket_price": 2500.5,
+  "ticket": {
+    "id": 1,
+    "set": {
+      "name": "VIP Зона///VIP Zone"
+    },
+    "seat": {
+      "row": "A",
+      "number": "12"
+    },
+    "barcode": "1234567890123456",
+    "serial": "TC",
+    "number": "987654321",
+    "order": {
+      "vars": {}
+    }
+  },
+  "discount": 500,
+  "tariff_name": "Предварительная продажа///Early Bird",
+  "legal": {
+    "detail": {
+      "name": "ООО 'Билетные системы'///Tickets Systems LLC",
+      "address": "г. Москва, ул. Примерная, д. 1",
+      "inn": "1234567890",
+      "ogrn": "1234567890123"
+    }
+  },
+  "qrcode": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTMwIiBoZWlnaHQ9IjEzMCI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI2ZmZiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGZpbGw9IiMwMDAiPlFSIENPREU8L3RleHQ+PC9zdmc+",
+  "vat_rate": "20%"
+}
