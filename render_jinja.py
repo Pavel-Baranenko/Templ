@@ -1,6 +1,9 @@
 import json
 import os
 import base64
+import time
+import sys
+import hashlib
 from decimal import Decimal, ROUND_UP
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -8,6 +11,8 @@ from jinja2 import Environment, FileSystemLoader, BaseLoader, Undefined
 import pytz
 from pytils import numeral
 from bson.tz_util import FixedOffset
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
 
 class Money:
     def __init__(self, value, currency="RUB"):
@@ -51,7 +56,8 @@ MONTH_NAMES = {
 
 
 def format_datetime(dt, format=None, tz=None, lang=None):
-    return ""
+
+    return dt
 
 def dumb_i18n(text, lang):
     if not text:
@@ -132,7 +138,9 @@ class MockFindTicketInfo:
 
 
 def render_template(template_path, data_path, output_path=None):
-
+    """Основная функция рендеринга шаблона"""
+    print(f"Рендеринг шаблона: {template_path} с данными: {data_path}")
+    
     with open(data_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
     
@@ -228,28 +236,139 @@ def render_template(template_path, data_path, output_path=None):
     try:
         rendered = template.render(**data)
     except Exception as e:
+        print(f"Ошибка при рендеринге: {e}")
         raise
     
     if output_path:
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write(rendered)
+        print(f"Результат сохранен в: {output_path}")
         return output_path
     else:
-        print(rendered)
+        print(rendered[:500] + "..." if len(rendered) > 500 else rendered)
         return rendered
+
+
+class TemplateChangeHandler(FileSystemEventHandler):
+    """Обработчик изменений файлов"""
+    
+    def __init__(self, template_path, data_path, output_path=None):
+        self.template_path = template_path
+        self.data_path = data_path
+        self.output_path = output_path
+        self.last_hash = None
+        
+        # Первоначальный рендеринг
+        self.render_on_change()
+    
+    def get_file_hash(self, filepath):
+        """Получить хеш файла для отслеживания изменений"""
+        try:
+            with open(filepath, 'rb') as f:
+                return hashlib.md5(f.read()).hexdigest()
+        except Exception as e:
+            return None
+    
+    def render_on_change(self):
+        """Выполнить рендеринг при изменении файлов"""
+        try:
+            render_template(self.template_path, self.data_path, self.output_path)
+            current_hash = self.get_file_hash(self.template_path)
+            current_data_hash = self.get_file_hash(self.data_path)
+            self.last_hash = (current_hash, current_data_hash)
+            print(f"Шаблон успешно обновлен в {datetime.now().strftime('%H:%M:%S')}")
+        except Exception as e:
+            print(f"Ошибка при рендеринге: {e}")
+    
+    def on_modified(self, event):
+        """Обработчик события изменения файла"""
+        if not event.is_directory:
+            # Проверяем, изменился ли наш файл шаблона или данных
+            template_changed = event.src_path == os.path.abspath(self.template_path)
+            data_changed = event.src_path == os.path.abspath(self.data_path)
+            
+            if template_changed or data_changed:
+                # Ждем немного, чтобы файл был полностью записан
+                time.sleep(0.1)
+                
+                # Получаем текущие хеши
+                current_template_hash = self.get_file_hash(self.template_path)
+                current_data_hash = self.get_file_hash(self.data_path)
+                
+                # Проверяем, действительно ли изменился контент
+                last_template_hash, last_data_hash = self.last_hash if self.last_hash else (None, None)
+                
+                if (template_changed and current_template_hash != last_template_hash) or \
+                   (data_changed and current_data_hash != last_data_hash):
+                    print(f"\n{'='*50}")
+                    print(f"Обнаружено изменение в: {os.path.basename(event.src_path)}")
+                    print(f"{'='*50}")
+                    self.render_on_change()
+
+
+def watch_and_render(template_path, data_path, output_path=None):
+    """
+    Запустить наблюдение за файлами и автоматический рендеринг
+    при изменениях
+    """
+    print(f"Запуск наблюдения за файлами...")
+    print(f"Шаблон: {template_path}")
+    print(f"Данные: {data_path}")
+    if output_path:
+        print(f"Выходной файл: {output_path}")
+    print(f"Нажмите Ctrl+C для остановки\n")
+    
+    # Создаем обработчик событий
+    event_handler = TemplateChangeHandler(template_path, data_path, output_path)
+    
+    # Создаем наблюдатель
+    observer = Observer()
+    
+    # Добавляем наблюдение за директориями
+    template_dir = os.path.dirname(os.path.abspath(template_path))
+    data_dir = os.path.dirname(os.path.abspath(data_path))
+    
+    # Наблюдаем за директориями обоих файлов
+    observer.schedule(event_handler, template_dir, recursive=False)
+    if template_dir != data_dir:
+        observer.schedule(event_handler, data_dir, recursive=False)
+    
+    # Запускаем наблюдатель
+    observer.start()
+    
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        print("\nОстановка наблюдения...")
+        observer.stop()
+    
+    observer.join()
+
 
 if __name__ == "__main__":
     import argparse
     
-    parser = argparse.ArgumentParser(description='Рендеринг Jinja2 шаблонов')
+    parser = argparse.ArgumentParser()
+    
     parser.add_argument('template', help='Путь к файлу шаблона .jinja2')
-    parser.add_argument('--data', default='content.json', help='Путь к файлу с данными')
+    parser.add_argument('--data', default='content.json', help='Путь к файлу с данными (по умолчанию: content.json)')
     parser.add_argument('--output', '-o', help='Путь для сохранения результата')
+    parser.add_argument('--watch', '-w', action='store_true', help='Включить наблюдение за изменениями файлов')
     
     args = parser.parse_args()
     
     try:
-        render_template(args.template, args.data, args.output)
+        if args.watch:
+            watch_and_render(args.template, args.data, args.output)
+        else:
+            result = render_template(args.template, args.data, args.output)
+            if result and args.output:
+                print(f"Шаблон сохранен")
+           
     except FileNotFoundError as e:
-        print(f"Не работает")
-   
+        print(f"Ошибка: {e}")
+        sys.exit(1)
+    except Exception as e:
+        print(f"Ошибка: {e}")
+        sys.exit(1)
