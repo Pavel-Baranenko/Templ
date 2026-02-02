@@ -2,7 +2,7 @@
 
 # Рендерить шаблон
 render:
-	python render_jinja.py ticket.jinja2 --output output.html
+	python render_jinja.py ticket.jinja2 --output output.html --watch
 
 # Открыть в браузере
 open:
