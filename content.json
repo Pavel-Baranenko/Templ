@@ -10,17 +10,17 @@
     "settings": {
       "invitation": false
     },
-    "number": "ABC-123456",
+    "number": "0000000000",
     "event": {
       "lifetime": {
-        "start": "2024-12-25T19:00:00+03:00",
+        "start": "20:00",
         "end": "2024-12-25T23:00:00+03:00"
       },
       "d": {
         "timezone": "Europe/Moscow"
       },
       "venue": {
-        "name": "Крокус Сити Холл///Crocus City Hall"
+        "name": "Любая площадка"
       },
       "age_rating": 18
     },
@@ -30,7 +30,7 @@
   "ticket": {
     "id": 1,
     "set": {
-      "name": "VIP Зона///VIP Zone"
+      "name": "танцевальный партер в первой зоне + встреча с кумиром"
     },
     "seat": {
       "row": "A",
@@ -43,8 +43,8 @@
       "vars": {}
     }
   },
-  "discount": 500,
-  "tariff_name": "Предварительная продажа///Early Bird",
+  "discount": null,
+  "tariff_name": "Фанатский",
   "legal": {
     "detail": {
       "name": "ООО 'Билетные системы'///Tickets Systems LLC",
