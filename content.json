@@ -20,7 +20,10 @@
         "timezone": "Europe/Moscow"
       },
       "venue": {
-        "name": "Любая площадка"
+        "name": "Любая площадка",
+        "city": {
+          "name": ""
+        }
       },
       "age_rating": 18
     },

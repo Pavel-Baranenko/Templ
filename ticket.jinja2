@@ -342,7 +342,9 @@
         </div>
         <div class="place">{{ order.event.venue.name|dumb_i18n('ru') }}</div>
         <div class="address">
-          АДРЕС: 
+          АДРЕС: {{ order.event.venue.city.name.get(lang,
+          order.event.venue.city.name.get('ru','')) }}, {{
+          order.event.venue.address|dumb_i18n(lang) }}.
         </div>
       </div>
       <div class="order-info">
