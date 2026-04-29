@@ -46,7 +46,7 @@
       "vars": {}
     }
   },
-  "discount": null,
+  "discount": 500,
   "tariff_name": "Фанатский",
   "legal": {
     "detail": {

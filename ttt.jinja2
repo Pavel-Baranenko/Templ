@@ -1,1 +1,3 @@
-{{ order.event.venue.city.name.get(lang, order.event.venue.city.name.get('ru','')) }}, {{ order.event.venue.address|dumb_i18n(lang) }}.
+ {{ order.event.venue.city.name.get(lang,
+          order.event.venue.city.name.get('ru','')) }}, {{
+          order.event.venue.address|dumb_i18n(lang) }}.

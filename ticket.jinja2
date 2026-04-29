@@ -6,17 +6,17 @@
     <title>Билет</title>
     <style>
       @font-face {
-        font-family: "NT Somic Bold";
-        src: url("{{ request.registry.settings.host_url }}/static/fonts/NT-Somic-Bold.ttf");
+        font-family: "Manrope Bold";
+        src: url("{{ request.registry.settings.host_url }}/static/fonts/Manrope-Bold.ttf");
         font-weight: 700;
         font-style: normal;
       }
 
       body {
         margin: 0;
-        font-family: "NT Somic Bold";
+        font-family: "Manrope Bold";
         font-weight: 700;
-        color: #293f50;
+        color: #fff;
       }
 
       .wrap {
@@ -41,19 +41,19 @@
       }
 
       .text-primary {
-        font-family: "NT Somic Bold";
+        font-family: "Manrope Bold";
         font-weight: 700;
         font-size: 16px;
         line-height: 20px;
-        color: #293f50;
+        color: #fff;
       }
 
       .text-secondary {
-        font-family: "NT Somic Bold";
+        font-family: "Manrope Bold";
         font-weight: 400;
         font-size: 15.5px;
         line-height: 15.5px;
-        color: #293f50;
+        color: #fff;
       }
 
       .price {
@@ -66,7 +66,7 @@
         position: absolute;
         bottom: 15px;
         right: 235px;
-        color: #293f50;
+        color: #fff;
         font-size: 7.3px;
       }
 
@@ -74,17 +74,17 @@
         position: absolute;
         bottom: 15px;
         left: 349px;
-        color: #293f50;
+        color: #fff;
         font-size: 7.3px;
       }
 
       .qrcode-box {
         position: absolute;
-        top: 366px;
-        right: 46px;
-        width: 103px;
-        height: 103px;
-        background-color: #293f50;
+        top: 39px;
+        right: 39px;
+        width: 105px;
+        height: 105px;
+        background-color: #fff;
         box-sizing: border-box;
       }
 
@@ -101,7 +101,7 @@
         width: 200px;
         height: 99px;
         overflow: hidden;
-        background-color: #293f50;
+        background-color: #fff;
       }
 
       .barcode {
@@ -120,48 +120,27 @@
         -webkit-transform-origin: left top;
         -o-transform-origin: left top;
         transform-origin: left top;
-        top: 532px;
-        left: 47px;
-        width: 215px;
-        height: 101px;
+        top: 529px;
+        left: 651px;
+        width: 193px;
+        height: 104px;
       }
 
       .big.barcode-number {
-        -moz-transform: rotate(-90deg);
-        -ms-transform: rotate(-90deg);
-        -webkit-transform: rotate(-90deg);
-        -o-transform: rotate(-90deg);
-        transform: rotate(-90deg);
-        -moz-transform-origin: left top;
-        -ms-transform-origin: left top;
-        -webkit-transform-origin: left top;
-        -o-transform-origin: left top;
-        transform-origin: left top;
-        top: 396px;
-        left: 159px;
-        bottom: auto;
-        right: auto;
-        color: #293f50;
-        font-size: 8.3px;
+        left: unset;
+        bottom: 553px;
+        right: 31px;
+        color: #fff;
+        font-size: 10.3px;
         text-transform: uppercase;
       }
 
       .big.ticket-serial-number {
-        -moz-transform: rotate(-90deg);
-        -ms-transform: rotate(-90deg);
-        -webkit-transform: rotate(-90deg);
-        -o-transform: rotate(-90deg);
-        transform: rotate(-90deg);
-        -moz-transform-origin: left top;
-        -ms-transform-origin: left top;
-        -webkit-transform-origin: left top;
-        -o-transform-origin: left top;
-        transform-origin: left top;
-        left: 159px;
-        bottom: 574px;
-        right: auto;
-        color: #293f50;
-        font-size: 8.3px;
+        left: unset;
+        bottom: 565px;
+        right: 31px;
+        color: #fff;
+        font-size: 10.3px;
         text-transform: uppercase;
       }
 
@@ -172,16 +151,14 @@
 
       .place {
         line-height: 18px;
-        font-size: 12.5px;
-        margin-top: 0px;
+        font-size: 17.5px;
+        margin-top: 10px;
       }
 
       .address {
-        margin-left: auto;
-        width: 140px;
-        margin-top: 10px;
+        margin-top: 4px;
         line-height: 8px;
-        font-size: 7.5px;
+        font-size: 9.5px;
       }
 
       .event-name {
@@ -202,54 +179,50 @@
 
       .org-legal-info {
         font-size: 7.5px;
-        line-height: 10px;
+        line-height: 7px;
       }
 
       .print-time {
-        font-size: 9px;
-        line-height: 9px;
+        font-size: 8px;
+        line-height: 10px;
       }
 
       .discount-refund {
         text-transform: uppercase;
         position: absolute;
-        top: 402px;
-        right: 285px;
+        top: 529px;
+        left: 32px;
         width: 218px;
         line-height: 10px;
         font-size: 8.2px;
-        color: #293f50;
-        text-align: center;
+        color: #fff;
       }
 
       .block-main {
-        text-align: right;
         position: absolute;
-        top: 256px;
-        right: 34px;
+        top: 73px;
+        left: 32px;
         text-transform: uppercase;
-        width: 200px;
+        width: 330px;
         font-size: 15.5px;
         line-height: 15.5px;
-        color: #293f50;
+        color: #fff;
       }
 
       .block-price-set {
-        font-weight: 500;
         font-size: 12.5px;
-        text-align: center;
         line-height: 12.5px;
         text-transform: uppercase;
         position: absolute;
-        top: 258px;
-        left: 286px;
+        top: 351px;
+        left: 32px;
         width: 220px;
       }
 
       .order-info {
         position: absolute;
-        top: 270px;
-        left: 37px;
+        top: 47px;
+        left: 32px;
         width: 185px;
       }
 
@@ -277,32 +250,31 @@
       }
 
       .lk-link {
-        color: #293f50;
+        color: #fff;
       }
 
       .order-number {
-        font-size: 10px;
+        font-size: 13px;
       }
 
       .set-label {
         margin-top: 4px;
       }
       .start-time {
-        font-size: 10.5px;
+        margin-top: 4px;
+        font-size: 12.5px;
       }
       .bottom-box {
         color: #e3e9fc;
+        text-align: center;
         position: absolute;
         width: 580px;
-        left: 37px;
-        top: 1069px;
+        left: 107px;
+        top: 1063px;
         text-transform: uppercase;
       }
-      .discount-refund-box {
-        position: absolute;
-        font-size: 11px;
-        left: 36px;
-        top: 618px;
+      .powerdby {
+        font-size: 7.5px;
       }
     </style>
   </head>
@@ -311,19 +283,17 @@
     <div class="wrap">
       <img
         class="bg"
-        src="{{ request.registry.settings.host_url }}/static/images/65c8a877d37721889cc5b53f-background.png"
+        src="{{ request.registry.settings.host_url }}/static/images/65ba59279f1002b206866c44.png"
       />
-
       <div class="block-price-set">
         <div>
-          ЦЕНА: {% if order.settings.invitation %}ПРИГЛАШЕНИЕ{% elif not
-          ticket_price %}БЕСПЛАТНО{% else %}{{ ticket_price|money_stringify }}{%
-          endif %}
+          {% if order.settings.invitation %}ПРИГЛАШЕНИЕ{% elif not ticket_price
+          %}БЕСПЛАТНО{% else %}{{ ticket_price|money_stringify }}{% endif %}
         </div>
-        <div style="margin-top: 20px; line-height: 14px">
-          КАТЕГОРИЯ: {{ ticket.set.name|dumb_i18n("ru") }}
+        <div style="margin-top: 52px; line-height: 15px">
+          {{ ticket.set.name|dumb_i18n("ru") }}
         </div>
-        <div style="margin-top: 22px; line-height: 14px">
+        <div style="margin-top: 12px; line-height: 15px">
           {% if ticket.seat %} РЯД {{ ticket.seat.row }}, МЕСТО {{
           ticket.seat.number }} {% endif %} {% if tariff_name %}
           <br />
@@ -332,20 +302,19 @@
         <div></div>
       </div>
       <div class="text-secondary block-main">
-        <div class="start-time">
-          НАЧАЛО В {{ order.event.lifetime.start | format_datetime('{: %H:%M}',
-          order.event.d.timezone, "ru") }}
-        </div>
         <div class="start-date">
           {{ order.event.lifetime.start | format_datetime('{:%-d %B %Y}',
           order.event.d.timezone, "ru") }}
         </div>
-        <div class="place">{{ order.event.venue.name|dumb_i18n('ru') }}</div>
-        <div class="address">
-          АДРЕС: {{ order.event.venue.city.name.get(lang,
-          order.event.venue.city.name.get('ru','')) }}, {{
-          order.event.venue.address|dumb_i18n(lang) }}.
+
+        <div class="start-time">
+          НАЧАЛО В {{ order.event.lifetime.start | format_datetime('{: %H:%M}',
+          order.event.d.timezone, "ru") }}
         </div>
+
+        <div class="place">{{ order.event.venue.name|dumb_i18n('ru') }}</div>
+        <div class="address">АДРЕС: 
+          </div>
       </div>
       <div class="order-info">
         <div class="text-primary order-number">ЗАКАЗ №{{ order.number }}</div>
@@ -361,13 +330,15 @@
       {% endif %} {% if not
       ticket.order.vars.find_ticket_info(ticket.id).discount and not
       order.settings.invitation %}
-      <div class="text-secondary discount-refund-box">
+      <div class="text-secondary discount-refund-box discount-refund">
         <div>ОФОРМИТЬ ВОЗВРАТ:</div>
         <div class="lk-link">customer.ticketscloud.com</div>
       </div>
       {% endif %}
 
       <div class="bottom-box">
+        <div class="powerdby">Powered by Ticketscloud www.ticketscloud.com</div>
+
         <div class="org-legal-info">
           Организатор {{ legal.detail.name|dumb_i18n("ru") }}, {{
           legal.detail.address|dumb_i18n("ru") }} ИНН {{ legal.detail.inn }},
@@ -389,6 +360,7 @@
           alt="barcode"
         />
       </div>
+
       <div class="text-secondary barcode-number big">{{ ticket.barcode }}</div>
       <div class="text-secondary ticket-serial-number big">
         Серия {{ ticket.serial }} №{{ ticket.number }}
